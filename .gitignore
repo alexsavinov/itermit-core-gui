@@ -1,0 +1,8 @@
+.angular
+.idea
+dist
+node_modules
+src/environments
+!src/environments/environment_example.ts
+coverage
+yarn.lock
