@@ -4,6 +4,7 @@ import { debounceTime, tap } from 'rxjs/operators';
 
 import { SettingsService } from '@core';
 import { AuthService, User } from '@core/authentication';
+import {environment} from "@env/environment";
 
 
 @Component({
@@ -15,7 +16,9 @@ import { AuthService, User } from '@core/authentication';
 
     <button id="current-user-button" *ngIf="user.id" matTooltip="{{user.username}}"
             class="r-full" mat-button [matMenuTriggerFor]="menu">
-      <img matButtonIcon class="avatar r-full" [src]="user.avatar" width="24" alt="avatar"/>
+      <img matButtonIcon class="avatar r-full"
+           [src]="environment.staticUrl + environment.avatarImages + user.profile?.avatar | safeUrl"
+           width="24" alt="avatar"/>
       <span id="current-user" class="m-x-8">
         {{ user.username }}
       </span>
@@ -82,4 +85,6 @@ export class UserComponent implements OnInit {
     this.settings.reset();
     window.location.reload();
   }
+
+  protected readonly environment = environment;
 }
